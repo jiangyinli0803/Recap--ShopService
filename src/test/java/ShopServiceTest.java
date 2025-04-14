@@ -38,7 +38,7 @@ class ShopServiceTest {
     }
 
     @Test
-    void getOrderByStatusTest() throws Exception {
+    void getOrderByStatusTest() {
         //given
         OrderRepo orderRepo = new OrderMapRepo();
         orderRepo.addOrder(new Order("1", List.of(), OrderStatus.PROCESSING, Instant.now()));
