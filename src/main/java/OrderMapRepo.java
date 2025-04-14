@@ -1,3 +1,4 @@
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,12 @@ public class OrderMapRepo implements OrderRepo{
 
     @Override
     public Order addOrder(Order newOrder) {
+        newOrder = new Order(
+                newOrder.id(),
+                newOrder.products(),
+                newOrder.orderStatus(),
+                ZonedDateTime.now());
+
         orders.put(newOrder.id(), newOrder);
         return newOrder;
     }

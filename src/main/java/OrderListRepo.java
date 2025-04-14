@@ -1,3 +1,4 @@
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,11 @@ public class OrderListRepo implements OrderRepo{
     }
 
     public Order addOrder(Order newOrder) {
+        newOrder = new Order(
+                newOrder.id(),
+                newOrder.products(),
+                newOrder.orderStatus(),
+                ZonedDateTime.now());
         orders.add(newOrder);
         return newOrder;
     }
