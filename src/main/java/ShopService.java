@@ -8,8 +8,14 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class ShopService {
-    private final ProductRepo productRepo = new ProductRepo();
-    private final OrderRepo orderRepo = new OrderMapRepo();
+    private ProductRepo productRepo = new ProductRepo();
+    private OrderRepo orderRepo = new OrderMapRepo();
+
+    public ShopService(ProductRepo productRepo, OrderRepo orderRepo) {
+        this.productRepo = productRepo;
+        this.orderRepo = orderRepo;
+
+    }
 
     public Order addOrder(List<String> productIds) throws Exception {
         List<Product> products = new ArrayList<>();
