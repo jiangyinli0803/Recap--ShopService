@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShopServiceTest {
 
     @Test
-    void addOrderTest() throws Exception {
+    void addOrderTest() throws ProductNotAvailableException {
         //GIVEN
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("1");
@@ -25,16 +25,20 @@ class ShopServiceTest {
     }
 
     @Test
-    void addOrderTest_whenInvalidProductId_expectNull() throws Exception {
+    void addOrderTest_whenInvalidProductId_expectException() {
         //GIVEN
         ShopService shopService = new ShopService();
         List<String> productsIds = List.of("1", "2");
 
         //WHEN
-        Order actual = shopService.addOrder(productsIds);
 
         //THEN
-        assertNull(actual);
+        try{
+            shopService.addOrder(productsIds);
+            fail("Expected ProductNotAvailableException not thrown");
+        } catch (ProductNotAvailableException e) {
+
+        }
     }
 
     @Test
