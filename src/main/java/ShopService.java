@@ -1,8 +1,12 @@
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class ShopService {
     private final ProductRepo productRepo = new ProductRepo();
     private final OrderRepo orderRepo = new OrderMapRepo();
@@ -18,13 +22,13 @@ public class ShopService {
             products.add(productToOrder.get());
         }
 
-        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
+        Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING, Instant.now());
 
         return orderRepo.addOrder(newOrder);
     }
     public List<Order> getOrderByStatus(List<Order> orders, OrderStatus orderStatus) {
         // List<Order> orders = new ArrayList<>();
-        return orders.stream()
+        return orders.stream()  //orderRepo.getOrders().stream()
                 .filter(order -> order.orderStatus() == orderStatus)
                 .toList();
     }

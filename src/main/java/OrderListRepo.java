@@ -1,3 +1,4 @@
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class OrderListRepo implements OrderRepo{
                 newOrder.id(),
                 newOrder.products(),
                 newOrder.orderStatus(),
-                ZonedDateTime.now());
+                Instant.now());
         orders.add(newOrder);
         return newOrder;
     }
