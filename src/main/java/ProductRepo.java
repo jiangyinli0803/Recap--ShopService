@@ -14,19 +14,19 @@ public class ProductRepo {
         return products;
     }
 
-  /*  public Product getProductById(String id) {
+  public Optional<Product> getProductById(String id) {
         for (Product product : products) {
             if (product.id().equals(id)) {
-                return product;
+                return Optional.of(product);
             }
         }
-        return null;
-    }*/
-    public Optional<Product> getProductById(String id) {
+        return Optional.empty();
+    }
+   /* public Optional<Product> getProductById(String id) {
         return products.stream()
                 .filter(product -> product.id().equals(id))
                 .findFirst();
-    }
+    }*/
 
     public Product addProduct(Product newProduct) {
         products.add(newProduct);
