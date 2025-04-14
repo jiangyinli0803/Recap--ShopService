@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Instant;
 
 import java.util.List;
-import java.util.UUID;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,5 +62,18 @@ class ShopServiceTest {
         //then
         assertEquals(List.of(order2, order3), actual);
 
+    }
+
+    @Test
+    void updateOrderTest() throws ProductNotAvailableException {
+        //given
+        ShopService shopService = new ShopService();
+        List<String> productsIds = List.of("1");
+        Order order = shopService.addOrder(productsIds);
+        //when
+       OrderStatus actual =  shopService.updateStatus(order.id(), OrderStatus.IN_DELIVERY);
+        //then
+        OrderStatus expected = OrderStatus.IN_DELIVERY;
+        assertEquals(expected, actual);
     }
 }
