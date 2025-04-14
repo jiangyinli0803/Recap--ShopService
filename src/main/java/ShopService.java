@@ -26,21 +26,18 @@ public class ShopService {
 
         return orderRepo.addOrder(newOrder);
     }
-    public List<Order> getOrderByStatus(List<Order> orders, OrderStatus orderStatus) {
-        // List<Order> orders = new ArrayList<>();
-        return orders.stream()  //orderRepo.getOrders().stream()
+    public List<Order> getOrderByStatus(OrderStatus orderStatus) {
+
+        return orderRepo.getOrders().stream()
                 .filter(order -> order.orderStatus() == orderStatus)
                 .toList();
     }
 
-    public Order updateOrder(String orderId, OrderStatus newStatus) throws Exception {
-        Order order = orderRepo.getOrderById(orderId);
-        if(order.products().isEmpty()){
-            throw new Exception("Order mit der Id: " + orderId + " wurde nicht gefunden!");
-        }
+    public OrderStatus updateStatus(String orderId, OrderStatus newStatus){
+        Order order = orderRepo.getOrderById(orderId).withOrderStatus(newStatus);
+        orderRepo.removeOrder(orderId);
+        orderRepo.addOrder(order);
+        return order.orderStatus();
 
-        Order updateOrder = order.withOrderStatus(newStatus);
-
-        return orderRepo.updateOrder(updateOrder);
     }
 }
