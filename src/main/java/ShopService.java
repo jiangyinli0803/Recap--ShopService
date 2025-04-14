@@ -28,4 +28,15 @@ public class ShopService {
                 .filter(order -> order.orderStatus() == orderStatus)
                 .toList();
     }
+
+    public Order updateOrder(String orderId, OrderStatus newStatus) throws Exception {
+        Order order = orderRepo.getOrderById(orderId);
+        if(order.products().isEmpty()){
+            throw new Exception("Order mit der Id: " + orderId + " wurde nicht gefunden!");
+        }
+
+        Order updateOrder = order.withOrderStatus(newStatus);
+
+        return orderRepo.updateOrder(updateOrder);
+    }
 }

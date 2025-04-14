@@ -30,4 +30,13 @@ public class OrderListRepo implements OrderRepo{
             }
         }
     }
+
+    public Order updateOrder(Order newOrder) {
+        for (Order order : orders) {
+            if (order.id().equals(newOrder.id())) {
+                order = newOrder;
+            }
+        }
+        return newOrder;
+    }
 }
